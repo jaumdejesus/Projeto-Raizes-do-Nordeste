@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RaizesApi.Data;
 using RaizesApi.Services;
+using RaizesApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,16 +22,28 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddTransient<TokenService>();
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = TokenHelper.GetTokenValidationParameters(builder.Configuration);
+});
+
+builder.Services.AddAuthorization();   
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapControllers();
-
 }
 
-app.UseHttpsRedirection();
+app.MapControllers();
 
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseHttpsRedirection();
 app.Run();
