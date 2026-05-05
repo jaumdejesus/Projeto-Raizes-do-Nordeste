@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RaizesApi.Helpers
 {
-    public static class TokenHelper
+    internal static class TokenHelper
     {
         public static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
         {
@@ -20,6 +20,5 @@ namespace RaizesApi.Helpers
                 ClockSkew = TimeSpan.Zero
             };
         }
-
     }
 }

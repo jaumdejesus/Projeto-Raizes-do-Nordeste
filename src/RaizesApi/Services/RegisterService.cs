@@ -6,7 +6,7 @@ using RaizesApi.Repositories;
 
 namespace RaizesApi.Services
 {
-    public class RegisterService : IRegisterService
+    internal class RegisterService : IRegisterService
     {
         private readonly IRegisterRepository registerRepository;
         public RegisterService(IRegisterRepository repository)

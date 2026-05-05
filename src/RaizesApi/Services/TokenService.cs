@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-public class TokenService : IToken
+internal class TokenService : IToken
 {
     private readonly string _key;
     public TokenService(IConfiguration configuration)

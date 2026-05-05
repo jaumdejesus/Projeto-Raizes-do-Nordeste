@@ -12,7 +12,7 @@ namespace RaizesApi.Controllers
     {
         private readonly IToken _iTokenService;
 
-        public LoginController(TokenService tokenService)
+        public LoginController(IToken tokenService)
         {
             _iTokenService = tokenService;
         }
