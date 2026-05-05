@@ -1,27 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RaizesApi.DTOs;
+using RaizesApi.Interfaces;
 using RaizesApi.Services;
+using System.Net;
 
 namespace RaizesApi.Controllers
 {
     [ApiController]    
     public class LoginController : ControllerBase
     {
-        private readonly TokenService _tokenService;
+        private readonly IToken _iTokenService;
 
         public LoginController(TokenService tokenService)
         {
-            _tokenService = tokenService;
+            _iTokenService = tokenService;
         }
 
         [HttpPost]
         [Route("login")]
         public IActionResult Login([FromBody] LoginDto login)
         {
-            string token = _tokenService.Gerar(login);
-
-            return new JsonResult(new { token });
+            return new JsonResult( new 
+            { 
+                token = _iTokenService.Generate(login), status = HttpStatusCode.OK 
+            });
         }
 
         [Authorize(Roles = "admin")]

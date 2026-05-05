@@ -6,13 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using RaizesApi.Data;
 using RaizesApi.Services;
 using RaizesApi.Helpers;
+using RaizesApi.Interfaces;
+using RaizesApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -21,6 +21,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddTransient<TokenService>();
+
+builder.Services.AddScoped<IToken, TokenService>();
+builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
 
 builder.Services.AddAuthentication(options =>
 {

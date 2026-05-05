@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RaizesApi.Models;
 
 namespace RaizesApi.Data
 {
@@ -20,6 +21,7 @@ namespace RaizesApi.Data
         public DbSet<ProdutoUnidade> ProdutosUnidade { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
+        public DbSet<UsuarioLogin> UsuarioLogin { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

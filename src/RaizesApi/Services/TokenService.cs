@@ -3,25 +3,26 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RaizesApi.DTOs;
+using RaizesApi.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-public class TokenService
+public class TokenService : IToken
 {
     private readonly string _key;
     public TokenService(IConfiguration configuration)
     {
         _key = configuration["Jwt:Key"];
     }
-    public string Gerar(LoginDto login)
+    public string Generate(LoginDto login)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_key); // Substitua por uma chave secreta forte
+        var key = Encoding.ASCII.GetBytes(_key); 
         var tokenDescriptor = new SecurityTokenDescriptor 
         {            
             Subject = GenerateClaims(login),
-            Expires = DateTime.UtcNow.AddMinutes(1), // Define a expiração do token
+            Expires = DateTime.UtcNow.AddMinutes(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
