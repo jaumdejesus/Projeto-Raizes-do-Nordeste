@@ -5,14 +5,23 @@ namespace RaizesApi.Services
 {
     internal class ProdutoService : IProdutoService
     {
-        public void CadastrarProduto(ProdutoCreateDTO produtoDTO)
+        private readonly IProdutoRepository _produtoRepository;
+
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
-            throw new NotImplementedException();
+            _produtoRepository = produtoRepository;
         }
 
-        public List<ProdutoUnidade> ListarPorUnidade(int idUnidade)
+        public async Task<ServiceResult> CadastrarProduto(ProdutoCreateDTO produtoDTO)
         {
-            throw new NotImplementedException();
+            var answer = await _produtoRepository.Criar(Produto.Criar(produtoDTO));
+            return answer ? ServiceResult.Ok() : 
+                ServiceResult.Fail("Não foi possível cadastrar o produto.");
+        }
+
+        public List<Produto> ListarProdutos(int idUnidade)
+        {
+            return _produtoRepository.ListarProdutos(idUnidade).Result;
         }
     }
 }

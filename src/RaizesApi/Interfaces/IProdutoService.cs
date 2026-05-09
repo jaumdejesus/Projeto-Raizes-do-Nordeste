@@ -1,20 +1,21 @@
 ﻿using Application.DTOs;
+using RaizesApi.Services;
 
 namespace RaizesApi.Interfaces
 {
-    internal interface IProdutoService
+    public interface IProdutoService
     {
         /// <summary>
         /// Busca em produto_unidade o que está disponível.
         /// </summary>
         /// <param name="idUnidade"></param>
         /// <returns></returns>
-        List<ProdutoUnidade> ListarPorUnidade(int idUnidade);
+        List<Produto> ListarProdutos(int idUnidade);
 
         /// <summary>
         /// Salva na tabela produto.
         /// </summary>
         /// <param name="produtoDTO"></param>
-        void CadastrarProduto(ProdutoCreateDTO produtoDTO);
+        Task<ServiceResult> CadastrarProduto(ProdutoCreateDTO produtoDTO);
     }
 }

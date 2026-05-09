@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Application.DTOs;
 
 namespace RaizesApi;
 
@@ -17,4 +18,13 @@ public class Produto
     [Required]
     [Column("nome")]
     public string Nome { get; set; } = string.Empty;
+
+    public static Produto Criar(ProdutoCreateDTO produto)
+    {
+        return new Produto
+        {
+            IdCategoriaProduto = produto.IdCategoria,
+            Nome = produto.Nome
+        };
+    }
 }
