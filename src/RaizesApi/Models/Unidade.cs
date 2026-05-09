@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Application.DTOs;
 
 namespace RaizesApi;
 
@@ -18,4 +19,13 @@ public class Unidade
     [Required]
     [Column("endereco")]
     public string Endereco { get; set; } = string.Empty;
+
+    public static Unidade NovaUnidade(UnidadeDTO unidadeDTO)
+    {
+        return new Unidade
+        {
+            Nome = unidadeDTO.Nome,
+            Endereco = unidadeDTO.Endereco
+        };
+    }
 }

@@ -25,6 +25,8 @@ builder.Services.AddTransient<TokenService>();
 builder.Services.AddScoped<IToken, TokenService>();
 builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<IUnidadeRepository, UnidadeRepository>();
+builder.Services.AddScoped<IUnidadeService, UnidadeService>();
 
 builder.Services.AddAuthentication(options =>
 {

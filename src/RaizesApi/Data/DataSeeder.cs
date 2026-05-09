@@ -25,6 +25,12 @@ namespace RaizesApi.Data
                 new CanalPedido { IdCanalPedido = 2, Descricao = "Web" },
                 new CanalPedido { IdCanalPedido = 3, Descricao = "Totem" }
             );
+
+            modelBuilder.Entity<CategoriaProduto>().HasData(
+                new CategoriaProduto { IdCategoriaProduto = 1, Descricao = "Bebidas" },
+                new CategoriaProduto { IdCategoriaProduto = 2, Descricao = "Comida" },
+                new CategoriaProduto { IdCategoriaProduto = 3, Descricao = "Sobremesa" }
+            );
         }
         
     }
