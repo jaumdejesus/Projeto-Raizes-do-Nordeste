@@ -21,11 +21,12 @@ namespace RaizesApi.Data
         public DbSet<ProdutoUnidade> ProdutosUnidade { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
-        public DbSet<UsuarioLogin> UsuarioLogin { get; set; }
+        public DbSet<UsuarioLogin> UsuarioLogin { get; set; }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            DataSeeder.Seed(modelBuilder);
         }
     }
 }
