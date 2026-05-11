@@ -1,4 +1,6 @@
 ﻿namespace RaizesApi;
+
+using Application.DTOs;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
@@ -30,4 +32,16 @@ public class Cliente
 
     [Column("pontos_fidelidade")]
     public int PontosFidelidade { get; set; }
+
+    public static Cliente Criar(ClienteDTO cliente)
+    {
+        return new Cliente()
+        {
+            Nome = cliente.Nome,
+            Documento = cliente.Documento,
+            DataNascimento = Convert.ToDateTime(cliente.DataNascimento),
+            Telefone = cliente.Telefone,
+            Fidelizado = cliente.Fidelizado
+        };
+    }
 }
