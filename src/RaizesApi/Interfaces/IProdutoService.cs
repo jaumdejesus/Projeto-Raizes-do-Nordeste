@@ -10,12 +10,19 @@ namespace RaizesApi.Interfaces
         /// </summary>
         /// <param name="idUnidade"></param>
         /// <returns></returns>
-        List<Produto> ListarProdutos(int idUnidade);
+        public List<ProdutoUnidade> ListarProdutosPorUnidade(int idUnidade);
 
         /// <summary>
         /// Salva na tabela produto.
         /// </summary>
         /// <param name="produtoDTO"></param>
         Task<ServiceResult> CadastrarProduto(ProdutoCreateDTO produtoDTO);
+
+        /// <summary>
+        /// Salva na tabela produto_unidade, associando o produto a uma unidade e informando o estoque e preço.
+        /// </summary>
+        /// <param name="estoque"></param>
+        /// <returns></returns>
+        Task<ServiceResult> CadastrarProdutoUnidade(EstoqueUpdateDTO estoque);
     }
 }

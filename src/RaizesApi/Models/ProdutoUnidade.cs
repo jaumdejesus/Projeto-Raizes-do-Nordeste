@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Application.DTOs;
 
 namespace RaizesApi;
 
@@ -22,4 +23,15 @@ public class ProdutoUnidade
 
     [Column("preco", TypeName = "decimal(18,2)")]
     public decimal Preco { get; set; }
+
+    public static ProdutoUnidade Criar(EstoqueUpdateDTO estoque)
+    {
+        return new ProdutoUnidade
+        {
+            IdProduto = estoque.IdProduto,
+            IdUnidade = estoque.IdUnidade,
+            Estoque = estoque.Quantidade,
+            Preco = estoque.Preco
+        };
+    }
 }

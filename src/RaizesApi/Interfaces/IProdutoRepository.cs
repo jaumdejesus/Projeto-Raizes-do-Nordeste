@@ -5,6 +5,7 @@ namespace RaizesApi.Interfaces
     public interface IProdutoRepository
     {
         Task<bool> Criar(Produto produto);
-        Task<List<Produto>> ListarProdutos(int idUnidade);
+        Task<bool> CriarProdutoUnidade(ProdutoUnidade estoque);
+        Task<List<ProdutoUnidade>> ListarProdutos(int idUnidade);
     }
 }

@@ -19,7 +19,14 @@ namespace RaizesApi.Services
                 ServiceResult.Fail("Não foi possível cadastrar o produto.");
         }
 
-        public List<Produto> ListarProdutos(int idUnidade)
+        public async Task<ServiceResult> CadastrarProdutoUnidade(EstoqueUpdateDTO estoque)
+        {
+            var answer = await _produtoRepository.CriarProdutoUnidade(ProdutoUnidade.Criar(estoque));
+            return answer ? ServiceResult.Ok() :
+                ServiceResult.Fail("Não foi possível cadastrar o produto na unidade informada.");
+        }
+
+        public List<ProdutoUnidade> ListarProdutosPorUnidade(int idUnidade)
         {
             return _produtoRepository.ListarProdutos(idUnidade).Result;
         }

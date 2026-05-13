@@ -20,9 +20,18 @@ namespace RaizesApi.Repositories
             return asnwer > 0;
         }
 
-        public async Task<List<Produto>> ListarProdutos(int idUnidade)
+        public async Task<bool> CriarProdutoUnidade(ProdutoUnidade estoque)
         {
-            return await _context.Produtos.ToListAsync();
+            await _context.ProdutosUnidade.AddAsync(estoque);
+            var asnwer = await _context.SaveChangesAsync();
+            return asnwer > 0;
+        }
+
+        public async Task<List<ProdutoUnidade>> ListarProdutos(int idUnidade)
+        {
+            return await _context.ProdutosUnidade
+                .Where(u => u.IdUnidade == idUnidade)
+                .ToListAsync();
         }
     }
 }
